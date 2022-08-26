@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="success">#4BC593</color>
     <color name="background">#ffffff</color>
     <color name="h1">#484455</color>
     <color name="title">#000000</color>
+    <color name="normal">#000000</color>
+    <color name="success">#4BC593</color>
+    <color name="error">#EB5757</color>
+    <color name="warning">#F2C94C</color>
 </resources>

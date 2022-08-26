@@ -15,10 +15,25 @@
         android:layout_height="wrap_content"
         android:text="Success Toast" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/normal"
         android:id="@+id/btnNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Normal Toast" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/error"
+        android:id="@+id/btnError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error Toast" />
+
+    <com.google.android.material.button.MaterialButton
+        app:backgroundTint="@color/warning"
+        android:id="@+id/btnWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Warning Toast" />
 
 </LinearLayout>

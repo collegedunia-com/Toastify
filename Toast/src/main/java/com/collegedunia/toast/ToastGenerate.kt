@@ -35,12 +35,7 @@ class ToastGenerate constructor(private val context: Context) {
     private val layoutInflater: LayoutInflater
     private val toastLayout: View
     private val root: LinearLayout
-    private val shell: LinearLayout
     private var toastShown = MutableLiveData<Boolean>()
-    private lateinit var toast: Toast
-    private val imgLeft: ImageView
-    private val title: TextView
-    private val description: TextView
 
     init {
         listen.value = arrayListOf();
@@ -50,10 +45,6 @@ class ToastGenerate constructor(private val context: Context) {
 
         toastLayout = layoutInflater.inflate(R.layout.layout_custom_toast, null) as View
         root = toastLayout.findViewById(R.id.root)
-        shell = toastLayout.findViewById(R.id.shell)
-        imgLeft = toastLayout.findViewById(R.id.imgLeft)
-        title = toastLayout.findViewById(R.id.title)
-        description = toastLayout.findViewById(R.id.description)
 
         root.setPadding(50, 0, 50, 50);
 
@@ -61,16 +52,17 @@ class ToastGenerate constructor(private val context: Context) {
             addSource(listen) { value = it to value?.second }
             addSource(toastShown) { value = value?.first to it }
         }.observe(context as LifecycleOwner) { pair ->
+            Log.d("Debug", pair.first.toString()+ " " + pair.second)
+
             if(pair.second!=null && !pair.second!!) {
                 if (pair.first != null) {
                     if (pair.first!!.isNotEmpty()) {
-                        Log.d("ArrayList", pair.first.toString())
                         val item: ToastModel = pair.first!![pair.first!!.size - 1]
                         when (item.type) {
-                            ToastType.ERROR -> createErrorToast(toastLayout, shell, item)
-                            ToastType.SUCCESS -> createSuccessToast(toastLayout, shell, item)
-                            ToastType.WARNING -> createWarningToast(toastLayout, shell, item)
-                            ToastType.NORMAL -> createNormalToast(toastLayout, shell, item)
+                            ToastType.ERROR -> createErrorToast(toastLayout, item)
+                            ToastType.SUCCESS -> createSuccessToast(toastLayout, item)
+                            ToastType.WARNING -> createWarningToast(toastLayout, item)
+                            ToastType.NORMAL -> createNormalToast(toastLayout, item)
                         }
                         toastShown.value = true
                     }
@@ -99,48 +91,67 @@ class ToastGenerate constructor(private val context: Context) {
 
     private fun createNormalToast(
         toastLayout: View,
-        shell: View,
         item: ToastModel
     ) {
-        if(item.leftImage==null){
-            imgLeft.visibility = GONE
-        }else {
-            imgLeft.setImageDrawable(item.leftImage)
-        }
-
-        if(item.message==null){
-            description.visibility = GONE
-        }else {
-            description.text = item.message
-        }
-        title.text = item.title
-
+        val shell: View = createToast(toastLayout, item)
         shell.background = context.resources.getDrawable(R.drawable.bg_normal)
-        showToast(toastLayout)
+        showToast(toastLayout, item.length)
         cancel(item)
     }
 
     private fun createSuccessToast(
         toastLayout: View,
-        shell: View,
         item: ToastModel
     ) {
-        if(item.leftImage==null){
+        val shell: View = createToast(toastLayout, item)
+        shell.background = context.resources.getDrawable(R.drawable.bg_success)
+        showToast(toastLayout, item.length)
+        cancel(item)
+    }
+
+    private fun createErrorToast(
+        toastLayout: View,
+        item: ToastModel
+    ) {
+        val shell: View = createToast(toastLayout, item)
+        shell.background = context.resources.getDrawable(R.drawable.bg_error)
+        showToast(toastLayout, item.length)
+        cancel(item)
+    }
+
+    private fun createWarningToast(
+        toastLayout: View,
+        item: ToastModel
+    ) {
+        val shell: View = createToast(toastLayout, item)
+        shell.background = context.resources.getDrawable(R.drawable.bg_warning)
+        showToast(toastLayout, item.length)
+        cancel(item)
+    }
+
+    private fun createToast(
+        toastLayout: View,
+        item: ToastModel
+    ): View {
+        val shell: View = toastLayout.findViewById(R.id.shell)
+        val imgLeft: ImageView = toastLayout.findViewById(R.id.imgLeft)
+        val title: TextView = toastLayout.findViewById(R.id.title)
+        val description: TextView = toastLayout.findViewById(R.id.description)
+        if (item.leftImage == null) {
             imgLeft.visibility = GONE
-        }else {
+        } else {
+            imgLeft.visibility = VISIBLE
             imgLeft.setImageDrawable(item.leftImage)
         }
 
-        if(item.message==null){
+        if (item.message == null) {
             description.visibility = GONE
-        }else {
+        } else {
+            description.visibility = VISIBLE
             description.text = item.message
         }
         title.text = item.title
-
-        shell.background = context.resources.getDrawable(R.drawable.bg_success)
-        showToast(toastLayout)
-        cancel(item)
+        return shell
     }
 
     private fun cancel(item: ToastModel){
@@ -150,32 +161,21 @@ class ToastGenerate constructor(private val context: Context) {
             2000
         }
         Timer().schedule(time){
-            val updatedItems = listen.value as ArrayList<ToastModel>
-            updatedItems.remove(item)
+            val list: ArrayList<ToastModel>? = listen.value
+            list?.remove(item)
+            listen.postValue(list)
             toastShown.postValue(false)
         }
     }
 
-    private fun createErrorToast(
-        toastLayout: View,
-        shell: View,
-        item: ToastModel
-    ) {
-        TODO("Not yet implemented")
-    }
-
-    private fun createWarningToast(
-        toastLayout: View,
-        shell: View,
-        item: ToastModel
-    ) {
-        TODO("Not yet implemented")
-    }
-
-    private fun showToast(toastLayout: View) {
-        toast = Toast(context)
+    private fun showToast(toastLayout: View, length: ToastLength?) {
+        var toast: Toast = Toast(context)
         toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM,0,0)
-        toast.duration = Toast.LENGTH_LONG
+        toast.duration = if(length==ToastLength.LONG){
+            Toast.LENGTH_LONG
+        }else{
+            Toast.LENGTH_SHORT
+        }
         toast.view = toastLayout
         toast.show()
     }

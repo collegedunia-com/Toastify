@@ -17,12 +17,22 @@ class MainActivity : AppCompatActivity() {
             .createToastMessage(ToastModel(ToastType.SUCCESS,"Hello", null, this.resources.getDrawable(R.drawable.ic_check_mark)))
         findViewById<Button>(R.id.btnSuccess).setOnClickListener(View.OnClickListener {
             ToastGenerate.getInstance(this)
-                .createToastMessage(ToastModel(ToastType.SUCCESS,"Hello", null, null))
+                .createToastMessage(ToastModel(ToastType.SUCCESS,"Success", null, null))
         })
 
         findViewById<Button>(R.id.btnNormal).setOnClickListener(View.OnClickListener {
             ToastGenerate.getInstance(this)
-                .createToastMessage(ToastModel(ToastType.NORMAL,"Hello", null, null))
+                .createToastMessage(ToastModel(ToastType.NORMAL,"Normal", null, null))
+        })
+
+        findViewById<Button>(R.id.btnError).setOnClickListener(View.OnClickListener {
+            ToastGenerate.getInstance(this)
+                .createToastMessage(ToastModel(ToastType.ERROR,"Error", null, null))
+        })
+
+        findViewById<Button>(R.id.btnWarning).setOnClickListener(View.OnClickListener {
+            ToastGenerate.getInstance(this)
+                .createToastMessage(ToastModel(ToastType.WARNING,"Warning", "Warning message", null))
         })
     }
 }
