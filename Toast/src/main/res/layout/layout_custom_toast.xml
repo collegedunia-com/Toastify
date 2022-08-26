@@ -9,18 +9,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <TextView
+
+        <ImageView
+            android:paddingLeft="14dp"
+            android:id="@+id/imgLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/message"
-            android:textColor="@color/h1"
-            android:textSize="20sp"
-            android:text="sdfs"
-            android:padding="20dp"/>
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:text="Main notification title"
+                android:textColor="@color/title"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description"
+                android:text="Description text goes here (optional)"
+                android:textColor="@color/title"
+                android:textSize="14sp" />
+        </LinearLayout>
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"

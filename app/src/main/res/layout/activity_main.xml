@@ -15,4 +15,10 @@
         android:layout_height="wrap_content"
         android:text="Success Toast" />
 
+    <Button
+        android:id="@+id/btnNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal Toast" />
+
 </LinearLayout>

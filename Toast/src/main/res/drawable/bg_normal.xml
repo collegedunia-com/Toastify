@@ -51,7 +51,7 @@
                 android:right="1dp"
                 android:top="1dp" />
 
-            <solid android:color="@color/success" />
+            <solid android:color="@color/title" />
         </shape>
     </item>
     <item>
@@ -64,7 +64,7 @@
                 android:right="1dp"
                 android:top="1dp" />
 
-            <solid android:color="@color/success" />
+            <solid android:color="@color/title" />
         </shape>
     </item>
 
