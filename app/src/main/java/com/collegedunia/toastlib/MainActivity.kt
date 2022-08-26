@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             .createToastMessage(ToastModel(ToastType.SUCCESS,"Hello", null, this.resources.getDrawable(R.drawable.ic_check_mark)))
         findViewById<Button>(R.id.btnSuccess).setOnClickListener(View.OnClickListener {
             ToastGenerate.getInstance(this)
-                .createToastMessage(ToastModel(ToastType.SUCCESS,"Success", null, null))
+                .createToastMessage(ToastModel(ToastType.SUCCESS,"Success", "Some Description", this.resources.getDrawable(R.drawable.ic_check_mark)))
         })
 
         findViewById<Button>(R.id.btnNormal).setOnClickListener(View.OnClickListener {
