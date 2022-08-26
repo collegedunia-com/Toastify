@@ -69,6 +69,7 @@ class ToastGenerate constructor(private val context: Context) {
                 }
             }
         }
+        
 
     }
 
