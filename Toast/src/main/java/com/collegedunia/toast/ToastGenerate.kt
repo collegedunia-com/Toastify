@@ -46,7 +46,7 @@ class ToastGenerate constructor(private val context: Context) {
         toastLayout = layoutInflater.inflate(R.layout.layout_custom_toast, null) as View
         root = toastLayout.findViewById(R.id.root)
 
-        root.setPadding(50, 0, 50, 50);
+        root.setPadding(50, 0, 50, 0);
 
         MediatorLiveData<Pair<ArrayList<ToastModel>?, Boolean?>>().apply {
             addSource(listen) { value = it to value?.second }
@@ -171,7 +171,6 @@ class ToastGenerate constructor(private val context: Context) {
 
     private fun showToast(toastLayout: View, length: ToastLength?) {
         var toast: Toast = Toast(context)
-        toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM,0,0)
         toast.duration = if(length==ToastLength.LONG){
             Toast.LENGTH_LONG
         }else{
