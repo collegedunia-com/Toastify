@@ -3,7 +3,6 @@ package com.collegedunia.toast
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -16,7 +15,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
 
 
@@ -45,6 +43,14 @@ class ToastGenerate constructor(private val context: Context) {
 
         toastLayout = layoutInflater.inflate(R.layout.layout_custom_toast, null) as View
         root = toastLayout.findViewById(R.id.root)
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+
+
+        root.layoutParams = lp
 
         root.setPadding(50, 0, 50, 0);
 
