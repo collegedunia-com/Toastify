@@ -58,7 +58,7 @@ class ToastGenerate constructor(private val context: Context) {
             addSource(listen) { value = it to value?.second }
             addSource(toastShown) { value = value?.first to it }
         }.observe(context as LifecycleOwner) { pair ->
-            Log.d("Debug", pair.first.toString()+ " " + pair.second)
+            Log.d("DebugSSSS", pair.first!!.size.toString() + " " + pair.second)
 
             if(pair.second!=null && !pair.second!!) {
                 if (pair.first != null) {
