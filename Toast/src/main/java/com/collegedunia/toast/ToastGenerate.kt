@@ -151,13 +151,18 @@ class ToastGenerate constructor(private val context: Context) {
             imgLeft.setImageDrawable(item.leftImage)
         }
 
+        if (item.title == null) {
+            title.visibility = GONE
+        } else {
+            title.visibility = VISIBLE
+            title.text = item.title
+        }
         if (item.message == null) {
             description.visibility = GONE
         } else {
             description.visibility = VISIBLE
             description.text = item.message
         }
-        title.text = item.title
         return shell
     }
 
