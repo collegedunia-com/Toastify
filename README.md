@@ -44,6 +44,15 @@ ToastGenerate.getInstance(context)
 1. **ToastLength.SHORT**
 2. **ToastLength.LONG**
 
+# Screenshots:
+1. Success <br><img src="images/Screenshot_2022-08-26-13-34-40-322_com.collegedunia.toastlib.jpg" width="128"/>
+2. Normal <br><img src="images/Screenshot_2022-08-26-13-33-49-358_com.collegedunia.toastlib.jpg" width="128"/>
+3. Error <br><img src="images/Screenshot_2022-08-26-13-33-52-639_com.collegedunia.toastlib.jpg" width="128"/>
+4. Warning <br><img src="images/Screenshot_2022-08-26-13-33-55-765_com.collegedunia.toastlib.jpg" width="128"/>
+
+
+
+
 
 
 That's pretty much it. Thanks
