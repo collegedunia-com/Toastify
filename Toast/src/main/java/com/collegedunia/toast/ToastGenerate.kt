@@ -57,7 +57,7 @@ class ToastGenerate constructor(private val context: Context) {
         MediatorLiveData<Pair<ArrayList<ToastModel>?, Boolean?>>().apply {
             addSource(listen) { value = it to value?.second }
             addSource(toastShown) { value = value?.first to it }
-        }.observe(context as LifecycleOwner) { pair ->
+        }.observeForever { pair ->
             Log.d("DebugSSSS", pair.first!!.size.toString() + " " + pair.second)
 
             if(pair.second!=null && !pair.second!!) {
